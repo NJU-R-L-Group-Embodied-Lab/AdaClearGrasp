@@ -25,7 +25,7 @@ The core philosophy is **"High-Level Semantic Planning → Atomic Skill Scheduli
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/zjwqsd/AdaClearGrasp.git
+    git clone https://github.com/NJU-R-L-Group-Embodied-Lab/AdaClearGrasp.git
     cd AdaClearGrasp
     ```
 
@@ -89,7 +89,7 @@ python -m plan.vlm_plan \
 ```
 
 **Parameters**:
-*   `--scene_name`: Target object category (e.g., `apple`, `can`, `mug`).
+*   `--scene_name`: Target object category (e.g., `apple`, `can`, `mug`, `ball`, `cube`, `lego`, `pear`).
 *   `--clutter_count`: Number of clutter objects in the scene (e.g., `2`, `4`, `6`).
 *   `--scene_id`: Specific scene ID (corresponding to config files in `data/scenes/`).
 
@@ -100,6 +100,46 @@ python -m plan.vlm_plan \
 4.  VLM returns action instructions in JSON format (e.g., `{"action": "push", "args": {"side": "left", "dist_m": 0.1}}`).
 5.  MCP Runtime parses and executes the action.
 6.  Repeat until the task is completed or maximum steps are reached.
+
+### 3. Generate Random Scenes
+You can generate new random scenes with different clutter configurations using the provided script. This is useful for creating diverse test cases.
+
+```bash
+python scripts/gen_safe_random_scenes.py
+```
+*   Modify `CLUTTER_COUNTS` in the script to generate scenes with different numbers of objects.
+*   Generated scenes will be saved in `data/scenes/<category>/<count>/`.
+
+---
+
+## 🧪 Experiments
+
+To reproduce the full experimental results or run large-scale evaluations:
+
+### 1. Run Experiment Sweep
+Use the sweep script to run the VLM planner across multiple object categories and clutter levels. This script sequentially triggers parallel runs for each configuration.
+
+```bash
+python scripts/run_vlm_plan_sweep.py
+```
+*   **Customize**: Edit the `RUNS` list in `scripts/run_vlm_plan_sweep.py` to select specific objects or clutter counts.
+*   **Parallelism**: The script uses `scripts/run_parallel_vlm_plan.py` internally to execute multiple scene IDs (defaults to 10 scenes) in parallel. You can adjust `MAX_CONCURRENCY` in that file.
+
+### 2. Analyze Results
+After the experiments complete, use the summary script to aggregate metrics (success rate, steps taken) from the logs.
+
+```bash
+python scripts/summarize_vlm_plan_steps.py
+```
+*   This will parse logs from `data/logs/vlm_plan/` and generate a CSV report at `data/analysis/vlm_plan_tasks_summary.csv`.
+
+---
+
+## 💡 Tips & Troubleshooting
+
+*   **IK Failures**: If the robot fails to reach a target or grasp pose, it might be due to workspace limits or collisions. Try adjusting the target position or approach angle.
+*   **Video Recording**: To save videos of the execution, set `RUN_MODE = "video"` in the relevant script (e.g., `scripts/test_skills.py` or `plan/vlm_plan.py`). Videos will be saved to `data/videos/`.
+*   **Model Loading**: Ensure that the pre-trained PPO model (`data/models/ppo/PickClutterYCB-XArm7-v1/ppo_grasp.zip`) is present. This model is critical for the grasping phase.
 
 ---
 
