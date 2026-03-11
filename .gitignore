@@ -1,0 +1,66 @@
+# .vscode
+# **.pyc
+# *.png
+# data/**
+# !data/models/
+# !data/models/**
+# !data/scenes/
+# !data/scenes/**
+# configs/runtime_config.yaml
+# **/__pycache__
+
+# IDE
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Assets / outputs
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.gif
+
+# Runtime configs
+configs/runtime_config.yaml
+
+# Data: ignore all except models/ and scenes/
+data/**
+!data/models/
+!data/models/**
+!data/scenes/
+!data/scenes/**
+
+# GroundingDINO / weights (do NOT commit big model files)
+weights/
+*.pth
+*.pt
+*.onnx
+*.engine
+
+# Optional: cache folders
+.cache/
+wandb/
+runs/
+tensorboard/
+bak/
+
+usage.txt

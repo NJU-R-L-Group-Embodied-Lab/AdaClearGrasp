@@ -1,0 +1,18 @@
+{
+  "z_margin": 0.003,
+  "target": {
+    "type": "ycb",
+    "model_id": "025_mug",
+    "name": "target",
+    "xy": [0.0, 0.0],
+    "yaw": 1.8
+  },
+  "clutter": [
+    { "type": "ycb", "model_id": "010_potted_meat_can", "name": "can", "xy": [0.05, -0.10], "yaw": -1.2 },
+    { "type": "ycb", "model_id": "061_foam_brick", "name": "brick", "xy": [-0.05, 0.15], "yaw": -1.2 },
+    { "type": "ycb", "model_id": "013_apple", "name": "apple", "xy": [-0.05, 0.15], "yaw": -1.2 },
+    { "type": "ycb", "model_id": "077_rubiks_cube", "name": "cube", "xy": [-0.05, 0.15], "yaw": -1.2 },
+    { "type": "ycb", "model_id": "053_mini_soccer_ball", "name": "ball", "xy": [0.05, 0.15], "yaw": -1.2 },
+    { "type": "ycb", "model_id": "017_orange", "name": "orange", "xy": [0.05, -0.10], "yaw": -1.2 }
+  ]
+}

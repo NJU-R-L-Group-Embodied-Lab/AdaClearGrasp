@@ -1,0 +1,35 @@
+{
+  "z_margin": 0.003,
+  "target": {
+    "type": "ycb",
+    "model_id": "073-e_lego_duplo",
+    "name": "target",
+    "xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 1.0
+  },
+  "clutter": [
+    {
+      "type": "ycb",
+      "model_id": "010_potted_meat_can",
+      "name": "fish_can",
+      "xy": [
+        0.05,
+        -0.1
+      ],
+      "yaw": -1.2
+    },
+    {
+      "type": "ycb",
+      "model_id": "061_foam_brick",
+      "name": "brick",
+      "xy": [
+        -0.05,
+        0.15
+      ],
+      "yaw": -1.2
+    }
+  ]
+}
