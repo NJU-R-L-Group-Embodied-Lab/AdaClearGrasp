@@ -1,0 +1,24 @@
+scene:
+  scene_id: apple_2_1
+  scene_json: data/scenes/apple/2/1.json
+
+environment:
+  env_id: PickClutterYCB-XArm7-v1
+  control_mode: pd_ee_delta_pose
+  mode: plan
+  obs_mode: rgb
+  render_mode: rgb_array
+  only_target_object: false
+  use_external_arm_init: true
+  reconfiguration_freq: 0
+
+server:
+  transport: streamable-http
+  host: 127.0.0.1
+  port: 8877
+  streamable_http_path: /mcp
+  log_level: INFO
+
+safety:
+  audit_log: logs/clutter_bench_mcp_safety.jsonl
+  review_ttl_s: 900

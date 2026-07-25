@@ -19,7 +19,7 @@ from exec.skills.clear import PullSkill, PushSkill
 from exec.skills.init import InitSkill
 
 
-RUN_MODE = "window"  # "window" | "video"
+RUN_MODE = "video"  # "window" | "video"
 VIDEO_TAG = "test_skills"
 
 ENV_ID = "PickClutterYCB-XArm7-v1"
@@ -82,7 +82,10 @@ def MANUAL_CALLS(env):
     grasp = GraspSkill(env)
 
     init.initarm(render=True)
-
+    mv.move_to("apple",render=True)
+    mv.lower(render=True)
+    push.push(side="center",dist_m=0.1,render=True)
+    mv.lift(render=True)
     grasp.grasp(render=True)
 
 

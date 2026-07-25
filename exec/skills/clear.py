@@ -213,9 +213,9 @@ class _SimplePushPull(BaseSkill):
             # 1) Yaw align
             ok_yaw, _yaw_steps = self._yaw_align(yaw_finger, render=render, verbose=verbose)
 
-            # 1.5) Set finger pose to "work"
+            # 1.5) Set finger pose to push or pull
             pose_skill = EEPoseSkill(self.env)
-            pose_res = pose_skill.set_pose("work", render=render, verbose=verbose)
+            pose_res = pose_skill.set_pose(mode, render=render, verbose=verbose)
 
             # 2) Move until moved_total reaches dist_m (step budget is just safety)
             step_m = float(self.cfg.step_m)

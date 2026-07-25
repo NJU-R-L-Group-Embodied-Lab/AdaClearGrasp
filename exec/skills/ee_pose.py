@@ -9,7 +9,7 @@ import torch
 
 from exec.skills.base import BaseSkill, SkillResult, StepEvent
 
-Pose = Literal["flat", "work"]
+Pose = Literal["flat", "push", "pull"]
 
 
 @dataclass
@@ -29,12 +29,19 @@ class FingerPoseConfig:
             dtype=torch.float32,
         )
     )
-    q_push_pull: Optional[torch.Tensor] = field(
+    q_pull: Optional[torch.Tensor] = field(
         default_factory=lambda: torch.tensor(
             [0.0, 0.0, 1.4, 1.4, 1.4, 0.7, 1.4, 0.2, 0.2, 0.2, 0.2, 0.2],
             dtype=torch.float32,
         )
     )
+
+    q_push: Optional[torch.Tensor] = field(
+            default_factory=lambda: torch.tensor(
+                [1.5, 0.0, 1.4, 1.4, 1.4, -0.65, 1.4, 0.2, 0.2, 0.2, 0.2, 0.2],
+                dtype=torch.float32,
+            )
+        )
 
     moved_height_eps: float = 1e-3
 
@@ -80,8 +87,10 @@ class EEPoseSkill(BaseSkill):
         dev = self.env.device
         if pose == "flat":
             q = self.cfg.q_flat
-        elif pose == "work":
-            q = self.cfg.q_push_pull
+        elif pose == "pull":
+            q = self.cfg.q_pull
+        elif pose == "push":
+            q = self.cfg.q_push
         else:
             raise ValueError(pose)
 

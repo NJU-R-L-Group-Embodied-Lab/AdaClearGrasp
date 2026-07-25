@@ -69,6 +69,37 @@ Before running, you need to configure runtime parameters (e.g., VLM API Key).
 
 All commands should be run from the project root directory.
 
+### Fixed-scene MCP service for EmbodiedClaw
+
+`clutter_bench_mcp` is the supported integration boundary for EmbodiedClaw. The
+service creates exactly one concrete scene when the process starts and exposes
+only observation and atomic manipulation tools. It does not expose tools for
+creating, switching, resetting, or closing environments, and it stores no
+conversation or agent-session history.
+
+The default configuration owns the `apple_2_1` scene:
+
+```bash
+conda activate clear
+python -m clutter_bench_mcp --config configs/clutter_bench_mcp.yaml
+```
+
+Equivalent launcher:
+
+```bash
+./run_clutter_bench_mcp.sh
+```
+
+The Streamable HTTP endpoint is `http://127.0.0.1:8877/mcp`. Change the scene
+only in `configs/clutter_bench_mcp.yaml` and restart the service; agents cannot
+select a scene through MCP.
+
+Smoke test:
+
+```bash
+python scripts/test_clutter_bench_mcp.py
+```
+
 ### 1. Test Atomic Skills
 Before running complex VLM planning, it is recommended to test if the low-level atomic skills are working correctly. This script executes a sequence of predefined actions (reset, move, push/pull, grasp).
 
